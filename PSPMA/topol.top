@@ -1,0 +1,58 @@
+;
+;	File 'topol.top' was generated
+;	By user: alanl (-1)
+;	On host: DESKTOP-B6KT793
+;	At date: Mon Sep 28 12:59:51 2020
+;
+;	This is a standalone topology file
+;
+;	Created by:
+;	                    :-) GROMACS - gmx pdb2gmx, 2019.4 (-:
+;	
+;	Executable:   E:\Software\gmx2019.4\bin\gmx.exe
+;	Data prefix:  E:\Software\gmx2019.4
+;	Working dir:  F:\simulation\4.PSS-and-PSPMA-Brush\AA\PSPMA\30brush\20200928\2.402(0.2)\0
+;	Command line:
+;	  gmx pdb2gmx -f 30spma.pdb -o p1.gro -water spce
+;	Force field was read from current directory or a relative path - path added.
+;
+
+; Include forcefield parameters
+#include "./oplsaa.ff/forcefield.itp"
+
+
+#include "wall.itp"
+
+#include "pspma.itp"
+
+
+
+; Include Position restraint file
+#ifdef POSRES
+#include "posre.itp"
+#endif
+
+; Include water topology
+#include "./oplsaa.ff/spce.itp"
+
+#ifdef POSRES_WATER
+; Position restraint for each water oxygen
+[ position_restraints ]
+;  i funct       fcx        fcy        fcz
+   1    1       1000       1000       1000
+#endif
+
+; Include topology for ions
+#include "./oplsaa.ff/ions.itp"
+
+[ system ]
+; Name
+Protein in water
+
+[ molecules ]
+; Compound        #mols
+Polymer_chain_A     20
+SOL         48589
+Y                303
+CL               909
+K                600
